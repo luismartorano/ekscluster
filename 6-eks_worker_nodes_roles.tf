@@ -5,7 +5,7 @@
 # AmazonEC2ContainerRegistryReadOnly
 
 resource "aws_iam_role" "workernodes" {
-  name = "eks-iamrole-node-group"
+  name = "eks-node-group-nodes"
 
   assume_role_policy = jsonencode({
     Statement = [{

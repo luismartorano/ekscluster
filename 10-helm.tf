@@ -10,9 +10,13 @@ provider "helm" {
   }
 }
 
+resource "aws_iam_policy" "albc" {
+  name_prefix = "AWSLoadBalancerControllerIAMPolicy"
+  description = "Allows lb controller ${local.cluster_name} to manage ALB and NLB"
+  policy      = data.http.albc_policy_json.response_body
+}
 resource "helm_release" "aws-load-balancer-controller" {
-  name = "aws-load-balancer-controller"
-
+  name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
   namespace  = "kube-system"
@@ -42,4 +46,15 @@ resource "helm_release" "aws-load-balancer-controller" {
     aws_eks_node_group.worker-node-group,
     aws_iam_role_policy_attachment.aws_load_balancer_controller_attach
   ]
+}
+
+module "albc_irsa" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  version = "3.5.0"
+
+  create_role                   = true
+  role_name                     = "irsa-aws-load-balancer-controller"
+  role_policy_arns              = [aws_iam_policy.albc.arn]
+  provider_url                  = module.eks-cluster.cluster_oidc_issuer_url
+  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
 }

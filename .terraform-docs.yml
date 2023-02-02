@@ -1,0 +1,25 @@
+formatter: 'markdown'
+
+sections:
+  show:
+    - providers
+    - inputs
+    - outputs
+
+output:
+  file: README.md
+  mode: replace
+  template: |-
+    # Terraform - EKS
+    
+
+    ---
+
+    {{ .Content }}
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  hide-empty: true

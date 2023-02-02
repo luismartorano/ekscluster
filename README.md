@@ -1,6 +1,29 @@
-# EKS
-## DICAS PARA APRENDER COMO CONFIGURAR O AWS LOAD BALANCER CONTROLLER
+# Terraform - EKS
 
+---
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.51.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.8.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | n/a | `string` | `"1.24"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_aws_load_balancer_controller_role_arn"></a> [aws\_load\_balancer\_controller\_role\_arn](#output\_aws\_load\_balancer\_controller\_role\_arn) | n/a |
+
+
+# DICAS PARA APRENDER COMO CONFIGURAR O AWS LOAD BALANCER CONTROLLER
 1- Ir em EKS
 
 2- Ir em Details -> Copiar o OpenID Content provider URL

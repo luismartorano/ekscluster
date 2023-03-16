@@ -49,7 +49,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: teste.devopsmartorano.com
+    - host: api.martorano.dev
       http:
         paths:
           - path: /

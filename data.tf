@@ -8,4 +8,8 @@ data "http" "ascp_csi_driver" {
   url = "https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml"
 }
 
+data "aws_eks_cluster_auth" "token" {
+  name = local.cluster_name
+}
+
 

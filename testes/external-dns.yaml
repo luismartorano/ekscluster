@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: external-dns
+  name: external-dns #deve ser criada a policy com as liberações do route53 e add elas na role com o nome external-dns
   namespace: kube-system
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::284551195402:role/external-dns  #usar o arn de roles

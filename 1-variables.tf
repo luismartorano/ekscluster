@@ -3,5 +3,5 @@
 #}
 
 variable "cluster_version" {
-  default = "1.24"
+  default = "1.22"
 }

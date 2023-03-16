@@ -2,6 +2,7 @@ provider "helm" {
   kubernetes {
     host                   = aws_eks_cluster.martorano-eks.endpoint
     cluster_ca_certificate = base64decode(aws_eks_cluster.martorano-eks.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.token.token
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
       args        = ["eks", "get-token", "--cluster-name", aws_eks_cluster.martorano-eks.id]
@@ -55,6 +56,6 @@ module "albc_irsa" {
   create_role                   = true
   role_name                     = "irsa-aws-load-balancer-controller"
   role_policy_arns              = [aws_iam_policy.albc.arn]
-  provider_url                  = module.eks-cluster.cluster_oidc_issuer_url
+  provider_url                  = aws_iam_openid_connect_provider.eks.url
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
 }

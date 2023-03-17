@@ -1,3 +1,8 @@
+resource "null_resource" "kubectl" {
+  provisioner "local-exec" {
+    command = "aws eks --region ${local.region} update-kubeconfig --name ${local.cluster_name}"
+  }
+}
 resource "helm_release" "csi_secrets_store" {
   depends_on = [aws_eks_cluster.martorano-eks]
   name       = "csi-secrets-store"

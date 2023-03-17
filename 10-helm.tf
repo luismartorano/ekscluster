@@ -59,3 +59,15 @@ module "albc_irsa" {
   provider_url                  = aws_iam_openid_connect_provider.eks.url
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
 }
+  
+resource "helm_release" "external_dns" {
+
+  name       = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart      = "external-dns"
+  namespace  = "kube-system"
+  version    = "1.12.1"
+
+  values = [
+    file("${path.module}/values.yaml")
+  ]

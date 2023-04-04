@@ -1,6 +1,8 @@
 locals {
-  name   = "${local.cluster_name}-${replace(basename(path.cwd), "_", "-")}"
-  region = "us-east-1"
+  name            = "${local.cluster_name}-${replace(basename(path.cwd), "_", "-")}"
+  region          = "us-east-1"
+  profile         = "martorano"
+  cluster_version = "1.25"
   //worksparce -> Definir em terraform new workspace dev ou staging ou production
   dev        = terraform.workspace == "dev" ? "martorano-develop" : ""
   staging    = terraform.workspace == "staging" ? "martorano-staging" : ""

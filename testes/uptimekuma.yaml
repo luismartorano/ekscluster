@@ -1,5 +1,11 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: uptimekuma
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-uptimekuma
@@ -37,7 +43,7 @@ spec:
     spec:
       containers:
         - name: uptimekuma-monitoring
-          image: louislam/uptime-kuma:1
+          image: louislam/uptime-kuma:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3001
@@ -97,7 +103,6 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:284551195402:certificate/882c4eb4-f58c-4390-99f5-859c12dd4678
     alb.ingress.kubernetes.io/group.name: martorano-public
-    #alb.ingress.kubernetes.io/group.name: vision.apps-public
     alb.ingress.kubernetes.io/healthcheck-path: /healthcheck
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-2016-08

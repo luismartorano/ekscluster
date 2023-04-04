@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "martorano-eks" {
   name     = local.cluster_name
-  version  = var.cluster_version
+  version  = local.cluster_version
   role_arn = aws_iam_role.eks-iam-role.arn
 
   vpc_config {
